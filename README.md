@@ -18,6 +18,8 @@
 
 :star: 觉得有帮助的朋友可以给个Star
 
+此仓库个人使用，可能添加你用不到的功能或者引入不稳定因素，酌情使用
+
 ## :point_up: 更新通知
 20241021更新通知： 感谢[sz134055](https://github.com/sz134055)提交代码[PR #360](https://github.com/Samueli924/chaoxing/pull/360)，**添加了对题库答题的支持**  
 
