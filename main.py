@@ -299,6 +299,17 @@ def process_job(chaoxing, course, job, job_info, speed) -> StudyResult:
     return StudyResult.ERROR
 
 
+class _Sentinel:
+    def __lt__(self, other):
+        return True
+
+    def __gt__(self, other):
+        return False
+
+
+SENTINEL = _Sentinel()
+
+
 @dataclass(order=True)
 class ChapterTask:
     index: int
@@ -347,7 +358,7 @@ class JobProcessor:
 
         # 发送“哨兵”信号 (None)，告诉所有工作线程可以退出了
         for _ in range(self.workers):
-            self.task_queue.put(None)
+            self.task_queue.put(SENTINEL)
 
         # 等待所有工作线程真正执行完毕并退出
         for thread in self.threads:
@@ -360,7 +371,7 @@ class JobProcessor:
             task = self.task_queue.get()
 
             # 收到哨兵信号 (None)，退出循环
-            if task is None:
+            if task is SENTINEL:
                 break
 
             try:
